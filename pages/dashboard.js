@@ -205,7 +205,7 @@ export default function Dashboard() {
 
                 {
                     session && (
-                        <button onClick={() => supabase.auth.signOut()}>
+                        <button onClick={() => supabase.auth.signOut()} className={styles.logoutButton}>
                             <LogOut size={24} />
                         </button>
                     )
@@ -216,7 +216,7 @@ export default function Dashboard() {
 
             {/* show user_id, email, last_sign_in_at, joined_at */}
 
-            <table className={styles.table}>
+            <table className={styles.table} cellPadding="0" cellSpacing="0">
 
                 <thead className={styles.tableHead}>
                     <tr className={styles.textLeft}>
@@ -247,7 +247,7 @@ export default function Dashboard() {
                                                     const { error } = await supabase.rpc('deleteUserByEmail', { email_input: user.email });
                                                     if (error) console.error(error);
                                                 }
-                                            }} className={`${styles.deleteButton} ${styles.tableButton}`}>
+                                            }} className={styles.deleteButton}>
                                                 <UserMinusIcon size={18} />
                                             </button>
                                         </td>
@@ -258,7 +258,7 @@ export default function Dashboard() {
                                 {
                                     userAccount && userAccount.role === 'ADMIN' && userAccount.email === user.email && (
                                         <td className={styles.tableData}>
-                                            <button className={`${styles.disabledButton} ${styles.tableButton}`}>
+                                            <button className={styles.disabledButton} disabled>
                                                 <UserMinusIcon size={18} />
                                             </button>
                                         </td>
